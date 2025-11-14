@@ -10,11 +10,20 @@ LB:=Binomial(Binomial(n,t),m);;
 C:=Combinations(P,w+1);;
 F:=[];;
 COUNT:=-1;
+#percent count variable for cmd output
+perc := 0;
+Print("Counting to 100 percent\n");
 for I in B do
     Y:=[];
     COUNT:=COUNT+1;
-    Print(" ");
-    Print(Round(Float(100*COUNT/LB)));
+    #Print(" ");
+    #Redone Counter
+    new_perc := Int(Round(Float(100*COUNT/LB)));
+    if new_perc > perc then
+        perc := new_perc;
+        Print(perc, "\n");
+    fi;
+    #Print(Round(Float(100*COUNT/LB)));
     STOP:=0;
     for i in [1..m] do
     UniteSet(Y,I[i]);
@@ -42,7 +51,7 @@ for I in B do
                     fi;
                 od;
                 for k in [1..n] do
-                    if IsSubset(I[i],[k]) then
+                    if k in I[i] then
                         S[k]:=S[k]+1;
                         if S[k]>s then
                             STOP:=1;
@@ -127,4 +136,4 @@ GROUPS;
 Length(GROUPS);
 Print("\n\n\nRESUlLTS:\n");
 Print("The size of the automorphism group is ", Length(GROUPS[1]), "\nThe Group is:\n");
-Print(GROUPS[1]);
+Display(GROUPS[1]);
